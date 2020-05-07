@@ -7,6 +7,6 @@ import (
 func InitRoutes(e *echo.Echo) {
 
 	//set route here
-	AccountRoute(e)
-
+	AccountRouter(e)
+	ProductRouter(e)
 }

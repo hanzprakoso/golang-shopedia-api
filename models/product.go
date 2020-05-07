@@ -18,11 +18,15 @@ type Product struct {
 	Name        string `gorm:"column:Name" json:"Name"`
 	Domain      string `gorm:"column:Domain" json:"Domain"`
 	CategoryID  int    `gorm:"column:CategoryID" json:"CategoryID"`
+	Category Category `gorm:"foreignkey:CategoryID;ASSOCIATION_FOREIGNKEY:CategoryID;"`
 	Description string `gorm:"column:Description" json:"Description"`
 	MerchantID  int    `gorm:"column:MerchantID" json:"MerchantID"`
+	Merchant Merchant `gorm:"foreignkey:MerchantID;ASSOCIATION_FOREIGNKEY:MerchantID;"`
 	Price       int    `gorm:"column:Price" json:"Price"`
 	Weight      int    `gorm:"column:Weight" json:"Weight"`
-	WeightUnit  int    `gorm:"column:WeightUnit" json:"WeightUnit"`
+	WeightUnitID  int    `gorm:"column:WeightUnit" json:"WeightUnitID"`
+	WeightUnit Param `gorm:"foreignkey:ParamID;ASSOCIATION_FOREIGNKEY:WeightUnitID;"`
+	// C Merchant `gorm:"foreignkey:MerchantID;association_foreignkey:MerchantID" json:"C"`
 }
 
 // TableName sets the insert table name for this struct type
