@@ -13,14 +13,14 @@ var (
 	_ = null.Bool{}
 )
 
-type Courierservice struct {
+type CourierService struct {
 	CourierServiceID int    `gorm:"column:CourierServiceID;primary_key" json:"CourierServiceID"`
 	CourierID        int    `gorm:"column:CourierID" json:"CourierID"`
 	Name             string `gorm:"column:Name" json:"Name"`
-	Domain           string `gorm:"column:Domain" json:"Domain"`
+	Slug           string `gorm:"column:Slug" json:"Slug"`
 }
 
 // TableName sets the insert table name for this struct type
-func (c *Courierservice) TableName() string {
-	return "courierservices"
+func (c *CourierService) TableName() string {
+	return "courier_services"
 }

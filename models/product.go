@@ -14,22 +14,46 @@ var (
 )
 
 type Product struct {
-	ProductID   int    `gorm:"column:ProductID;primary_key" json:"ProductID"`
-	Name        string `gorm:"column:Name" json:"Name"`
-	Domain      string `gorm:"column:Domain" json:"Domain"`
-	CategoryID  int    `gorm:"column:CategoryID" json:"CategoryID"`
-	Category Category `gorm:"foreignkey:CategoryID;ASSOCIATION_FOREIGNKEY:CategoryID;"`
-	Description string `gorm:"column:Description" json:"Description"`
-	MerchantID  int    `gorm:"column:MerchantID" json:"MerchantID"`
-	Merchant Merchant `gorm:"foreignkey:MerchantID;ASSOCIATION_FOREIGNKEY:MerchantID;"`
-	Price       int    `gorm:"column:Price" json:"Price"`
-	Weight      int    `gorm:"column:Weight" json:"Weight"`
-	WeightUnitID  int    `gorm:"column:WeightUnit" json:"WeightUnitID"`
-	WeightUnit Param `gorm:"foreignkey:ParamID;ASSOCIATION_FOREIGNKEY:WeightUnitID;"`
-	// C Merchant `gorm:"foreignkey:MerchantID;association_foreignkey:MerchantID" json:"C"`
+	ProductID           int           `gorm:"column:ProductID;primary_key" json:"ProductID"`
+	Name                string        `gorm:"column:Name" json:"Name"`
+	Slug                string        `gorm:"column:Slug" json:"Slug"`
+	CategoryID          int           `gorm:"column:CategoryID" json:"CategoryID"`
+	Description         string        `gorm:"column:Description" json:"Description"`
+	MerchantID          int           `gorm:"column:MerchantID" json:"MerchantID"`
+	DiscountPercentage  int			  `gorm:"column:DiscountPercentage" json:"DiscountPercentage"`
+	PriceBeforeDiscount int			  `gorm:"column:PriceBeforeDiscount" json:"PriceBeforeDiscount"`
+	Price               int           `gorm:"column:Price" json:"Price"`
+	Weight              int           `gorm:"column:Weight" json:"Weight"`
+	WeightUnitID        int           `gorm:"column:WeightUnit" json:"-"`
+}
+
+type ProductCatalog struct {
+	Product
+	Rating              float64		`gorm:"column:Rating" json:"Rating"`
+	CountReview         int    		`gorm:"column:CountReview" json:"CountReview"`
+	Category			[]Category	`json:"Category;"`
+	Merchant Merchant 	`gorm:"foreignkey:MerchantID;association_foreignkey:MerchantID"`	
+}
+
+type ProductDetail struct {
+	Product	struct {
+		Product
+		WeightUnit string	`gorm:"foreignkey:ParamID;association_foreignkey:WeightUnitID"`
+	}
+	Category struct {
+		Category
+		Details []Category
+	}
+	Merchant Merchant
+	ProductsReview []struct{
+		ProductsReview
+		User	User	`gorm:"foreignkey:UserID;association_foreignkey:UserID"`
+	}
+	ProductsRating int
 }
 
 // TableName sets the insert table name for this struct type
-func (p *Product) TableName() string {
+func (p *ProductCatalog) TableName() string {
+// func TableName() string {
 	return "products"
 }

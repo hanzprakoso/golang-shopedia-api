@@ -1,12 +1,14 @@
-module shopedia
+module github.com/semicolon27/shopedia-api
 
 go 1.13
 
 require (
-	github.com/alexedwards/argon2id v0.0.0-20200420065805-90c52fcb498a // indirect
+	github.com/alexedwards/argon2id v0.0.0-20200420065805-90c52fcb498a
 	github.com/cosmtrek/air v1.12.1 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fatih/color v1.9.0 // indirect
+	github.com/gosimple/slug v1.9.0
+	github.com/graphql-go/graphql v0.7.9 // indirect
 	github.com/guregu/null v4.0.0+incompatible
 	github.com/imdario/mergo v0.3.9 // indirect
 	github.com/jinzhu/gorm v1.9.12

@@ -17,7 +17,7 @@ type Village struct {
 	VillageID     int    `gorm:"column:VillageID;primary_key" json:"VillageID"`
 	SubDistrictID int    `gorm:"column:SubDistrictID" json:"SubDistrictID"`
 	Name          string `gorm:"column:Name" json:"Name"`
-	Domain        string `gorm:"column:Domain" json:"Domain"`
+	Slug        string `gorm:"column:Slug" json:"Slug"`
 	PostalCode    string `gorm:"column:PostalCode" json:"PostalCode"`
 }
 

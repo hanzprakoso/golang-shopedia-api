@@ -17,7 +17,7 @@ type City struct {
 	CityID     int            `gorm:"column:CityID;primary_key" json:"CityID"`
 	ProvinceID int            `gorm:"column:ProvinceID" json:"ProvinceID"`
 	Name       string         `gorm:"column:Name" json:"Name"`
-	Domain     sql.NullString `gorm:"column:Domain" json:"Domain"`
+	Slug     string 		  `gorm:"column:Slug" json:"Slug"`
 }
 
 // TableName sets the insert table name for this struct type

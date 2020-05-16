@@ -1,0 +1,52 @@
+get product with rating
+SELECT p.*, COUNT(pr.Rating) AS CountRating, AVG(pr.Rating) AS Rating FROM `products` p NATURAL JOIN `products_reviews` pr
+func SetDomain(){
+	SetDomainCity()
+	SetDomainSubdistrict()
+	SetDomainVillage()
+}
+
+SELECT products.*, COUNT(pr.ReviewID) AS CountReview, AVG(pr.Rating) AS Rating FROM `products` LEFT JOIN products_reviews pr 
+ON pr.ProductID = products.ProductID WHERE (Name LIKE '%%')
+
+func SetDomainCity(){
+	db := database.GetDB()
+	var p models.City
+	var ps []models.City
+	var a uint32
+	db.Table("cities").Count(&a)
+	var i uint32
+	for i = 0; i < a; i++{
+		db.Select("Name").Find(&p, "CityID = ?", i+1)
+		db.Model(&p).Where("CityID = ?", i+1).Update("Slug", slug.Make(p.Name))
+	}
+	db.Find(&ps)
+}
+
+func SetDomainSubdistrict(){
+	db := database.GetDB()
+	var p models.Subdistrict
+	var ps []models.Subdistrict
+	var a uint32
+	db.Table("subdistricts").Count(&a)
+	var i uint32
+	for i = 0; i < a; i++{
+		db.Select("Name").Find(&p, "SubdistrictID = ?", i+1)
+		db.Model(&p).Where("SubdistrictID = ?", i+1).Update("Slug", slug.Make(p.Name))
+	}
+	db.Find(&ps)
+}
+
+func SetDomainVillage(){
+	db := database.GetDB()
+	var p models.Village
+	var ps []models.Village
+	var a uint32
+	db.Table("villages").Count(&a)
+	var i uint32
+	for i = 0; i < a; i++{
+		db.Select("Name").Find(&p, "VillageID = ?", i+1)
+		db.Model(&p).Where("VillageID = ?", i+1).Update("Slug", slug.Make(p.Name))
+	}
+	db.Find(&ps)
+}

@@ -16,7 +16,7 @@ var (
 type Province struct {
 	ProvinceID int            `gorm:"column:ProvinceID;primary_key" json:"ProvinceID"`
 	Name       string         `gorm:"column:Name" json:"Name"`
-	Domain     sql.NullString `gorm:"column:Domain" json:"Domain"`
+	Slug     sql.NullString   `gorm:"column:Slug" json:"Slug"`
 }
 
 // TableName sets the insert table name for this struct type

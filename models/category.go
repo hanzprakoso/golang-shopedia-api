@@ -14,23 +14,13 @@ var (
 )
 
 type Category struct {
-	CategoryID int    `gorm:"column:CategoryID;primary_key" json:"CategoryID"`
-	Name       string `gorm:"column:Name" json:"Name"`
-	Domain     string `gorm:"column:Domain" json:"Domain"`
-	ParentID   int    `gorm:"column:ParentID" json:"ParentID"`
-	CategoryDetails []CategoryDetails `gorm:"foreignkey:CategoryID;ASSOCIATION_FOREIGNKEY:ParentID;"`
+	CategoryID    int           `gorm:"column:CategoryID;primary_key" json:"CategoryID"`
+	Name          string        `gorm:"column:Name" json:"Name"`
+	Slug          string        `gorm:"column:Slug" json:"Slug"`
+	ParentID      sql.NullInt64 `gorm:"column:ParentID" json:"-"`
+	GrandParentID sql.NullInt64 `gorm:"column:GrandParentID" json:"-"`
 }
 
-type CategoryDetails struct {
-			CategoryID int     	`gorm:"column:CategoryID"`
-			Name       string 	`gorm:"column:Name"`
-			Domain		string 	`gorm:"column:Domain"`
-			ParentID   int  	`gorm:"column:ParentID"`
-}
-
-func (c *CategoryDetails) TableName() string {
-	return "categories"
-}
 // TableName sets the insert table name for this struct type
 func (c *Category) TableName() string {
 	return "categories"

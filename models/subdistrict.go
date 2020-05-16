@@ -17,7 +17,15 @@ type Subdistrict struct {
 	SubDistrictID int            `gorm:"column:SubDistrictID;primary_key" json:"SubDistrictID"`
 	CityID        int            `gorm:"column:CityID" json:"CityID"`
 	Name          string         `gorm:"column:Name" json:"Name"`
-	Domain        sql.NullString `gorm:"column:Domain" json:"Domain"`
+	Slug        sql.NullString `gorm:"column:Slug" json:"Slug"`
+}
+
+type SubdistrictWithCity struct {
+	SubDistrictID int            `gorm:"column:SubDistrictID;primary_key" json:"-"`
+	CityID        int            `gorm:"column:CityID" json:"-"`
+	Name          string         `gorm:"column:Name" json:"Name"`
+	Slug        sql.NullString `gorm:"column:Slug" json:"Slug"`
+	City	City	`gorm:"foreignkey:CityID;association_foreignkey:CityID"`	
 }
 
 // TableName sets the insert table name for this struct type
